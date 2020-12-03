@@ -359,8 +359,6 @@ function testSlope(xSlope: number, ySlope: number): number {
 	for (let yPos = ySlope; yPos < input.length; yPos+=ySlope) {
 		const row = input[yPos];
 		xPos = multiNext(xPosGen, xSlope);
-		//console.log(row);
-		//console.log(`The character at ${xPos}, ${yPos} is ${row.charAt(xPos)}`);
 		if(row.charAt(xPos) === "#"){
 			numTrees++;
 		}

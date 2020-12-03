@@ -346,8 +346,6 @@ let numTrees = 0;
 for (let yPos = 1; yPos < input.length; yPos++) {
 	const row = input[yPos];
 	xPos = multiNext(xPosGen, 3);
-	//console.log(row);
-	//console.log(`The character at ${xPos}, ${yPos} is ${row.charAt(xPos)}`);
 	if(row.charAt(xPos) === "#"){
 		numTrees++;
 	}
