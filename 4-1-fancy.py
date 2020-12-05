@@ -1192,7 +1192,6 @@ def displayPassport(passport: Passport, console: Console):
 def main():
 	numValid = 0
 	console = Console(color_system="auto")
-	console.print("[color=#00ff00]testing[/color]")
 	for passport in inputToPassports(INPUT):
 		console.clear()
 		displayPassport(passport, console)

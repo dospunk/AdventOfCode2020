@@ -1073,6 +1073,23 @@ hcl:#a97842
 eyr:2028"""
 
 import re
+from rich.console import Console
+from rich.table import Table
+from rich import box
+from rich.theme import Theme
+from rich.color import Color
+from random import randint
+import time 
+
+def get_char() -> str:
+	import sys
+	'''multi-platform getch that always returns a string'''
+	if sys.platform == "win32":
+		import msvcrt
+		return msvcrt.getch().decode("ASCII")
+	else:
+		import getch
+		return getch.getch()
 
 @dataclass
 class Passport:
@@ -1121,10 +1138,104 @@ def inputToPassports(input: str) -> list[Passport]:
 			passportArgs[name] = data
 		output.append(Passport(**passportArgs))
 	return output
+
+def convertColor(color: Optional[str]) -> str:
+	ignoreColors = ["z", "zzz", "grt", "oth", "utc", "dne", "gmt"]
+	if color is not None and color not in ignoreColors:
+		if color.startswith("#"):
+			return color
+		elif len(color) == 6:
+			return "#"+color
+		else:
+			return {
+				"grn": "green",
+				"amb": "#FFBF00",
+				"hzl": "#8E7618",
+				"gry": "bright_black",
+				"blu": "blue",
+				"brn": "#654321",
+				"lzr": "#00ff00",
+				"xry": "#0083D9"
+			}[color]
+	else:
+		return "white"
+
+def randomFace() -> str:
+	eyes = "0OoUQ="
+	mouths = "vU=-O"
+	noses = "|VC7U`"
+	brows = "_~="
+	#ears strings must be 2 chars long
+	ears = ["[]", "<>", "{}", "()"]
+	#hairs and bangs strings must be 5 characters long
+	bangs = ["     ", "|||||", "!!!!!", "#####"]
+	hairs = ["_____", "|||||", "_/~\\_", "|^^^|", "MMMMM"]
+	selections = {
+		"eyes": eyes[randint(0, len(eyes)-1)],
+		"ears": ears[randint(0, len(ears)-1)],
+		"mouths": mouths[randint(0, len(mouths)-1)],
+		"noses": noses[randint(0, len(noses)-1)],
+		"brows": brows[randint(0, len(brows)-1)],
+		"bangs": bangs[randint(0, len(bangs)-1)],
+		"hairs": hairs[randint(0, len(hairs)-1)]
+	}
+	return f"""   [hairclr]{selections["hairs"]}[/hairclr]   
+  /[hairclr]{selections["bangs"]}[/hairclr]\\  
+ / [hairclr]{selections["brows"]}[/hairclr]   [hairclr]{selections["brows"]}[/hairclr] \\ 
+{selections["ears"][0]}  [eyeclr]{selections["eyes"]}[/eyeclr]   [eyeclr]{selections["eyes"]}[/eyeclr]  {selections["ears"][1]}
+ \\   {selections["noses"]}   / 
+  \\_ {selections["mouths"]} _/  
+ ___| |___ 
+/         \\"""
+
+def formatPassportData(data: Optional[str]) -> str:
+	if data is not None:
+		return f"[u]{data.ljust(9, ' ')}[/u]" 
+	else:
+		return '[u]         [/u]'
+
+def displayPassport(passport: Passport, console: Console):
+	theme = Theme({
+		"eyeclr": convertColor(passport.ecl) ,
+		"hairclr": convertColor(passport.hcl) 
+	})
+	with console.use_theme(theme):
+		table = Table(title="Advent of Code Passport", box=box.ROUNDED, show_header=False, min_width=33)
+		table.add_column("picture", width=11)
+		table.add_column("data", width=15)
+		faceLines = randomFace().split("\n")
+		table.add_row(faceLines[0], f"byr: {formatPassportData(passport.byr)}")
+		table.add_row(faceLines[1], f"iyr: {formatPassportData(passport.iyr)}")
+		table.add_row(faceLines[2], f"eyr: {formatPassportData(passport.eyr)}")
+		table.add_row(faceLines[3], f"hgt: {formatPassportData(passport.hgt)}")
+		table.add_row(faceLines[4], f"hcl: {formatPassportData(passport.hcl)}")
+		table.add_row(faceLines[5], f"ecl: {formatPassportData(passport.ecl)}")
+		table.add_row(faceLines[6], f"pid: {formatPassportData(passport.pid)}")
+		table.add_row(faceLines[7], f"cid: {formatPassportData(passport.cid)}")
+		console.print(table)
 	
 def main():
 	numValid = 0
+	console = Console(color_system="auto")
 	for passport in inputToPassports(INPUT):
+		console.clear()
+		displayPassport(passport, console)
+		console.print("(y):heavy_check_mark: [green]VALID[/green]           :x: [red]INVALID[/red](n)")
+		direction = get_char()
+		console.clear()
+		if (direction == "y" and passport.isValid()) or (direction == "n" and not passport.isValid()):
+			print()
+			print()
+			print()
+			print()
+			console.print("[green]:heavy_check_mark:CORRECT:heavy_check_mark:[/]")
+		else:
+			print()
+			print()
+			print()
+			print()
+			console.print("[red]:x:INCORRECT:x:[/]")
+		time.sleep(0.5)
 		if passport.isValid():
 			numValid += 1
 	print(numValid)
