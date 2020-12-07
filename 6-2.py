@@ -18,9 +18,9 @@ def getGroupAnswers(input: str) -> list[dict[str,int]]:
 					groupAnswerCounts[char] += 1
 				else:
 					groupAnswerCounts[char] = 1
-		print(groupString)
-		pprint(groupAnswerCounts)
-		print("\n")
+		#print(groupString)#DEV
+		#pprint(groupAnswerCounts)#DEV
+		#print("\n")#DEV
 		out.append(groupAnswerCounts)
 	return out
 
