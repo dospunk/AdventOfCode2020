@@ -1,10 +1,6 @@
 import functools as ft
 #from pprint import pprint#DEV
-
-def getInput(fileLocation: str) -> str:
-	with open(fileLocation, 'r') as file:
-		#Thanks to /u/kaspayaz for helping me realize I needed to strip the input string!
-		return file.read().strip()
+from aocutils import getInput
 
 def getGroupAnswers(input: str) -> list[dict[str,int]]:
 	groupsStrings = input.split("\n\n")

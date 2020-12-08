@@ -1,12 +1,9 @@
 from __future__ import annotations
 from typing import Dict, List, NamedTuple, NewType
 from dataclasses import dataclass
+from aocutils import getInput
 
 MY_BAG = "shiny gold"
-
-def getInput(fileLocation: str) -> str:
-	with open(fileLocation, 'r') as file:
-		return file.read().strip()
 
 class HoldsData(NamedTuple):
 	color: str

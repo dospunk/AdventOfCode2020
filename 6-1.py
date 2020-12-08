@@ -1,8 +1,5 @@
 import functools as ft
-
-def getInput(fileLocation: str) -> str:
-	with open(fileLocation, 'r') as file:
-		return file.read()
+from aocutils import getInput
 
 def getGroupAnswers(input: str) -> list[set]:
 	groupsStrings = input.split("\n\n")
