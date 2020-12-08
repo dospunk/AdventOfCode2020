@@ -17,7 +17,7 @@ func parseInput(rawInput string) []vm.Instruction {
 		op := strings.TrimSpace(splitLine[0])
 		val, err := strconv.Atoi(strings.TrimSpace(splitLine[1]))
 		aocutils.CheckErr(err)
-		instr := vm.Instruction{op, val}
+		instr := vm.Instruction{Opcode: op, Value: val}
 		out[i] = instr
 	}
 	return out
