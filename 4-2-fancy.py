@@ -1,6 +1,6 @@
 from typing import Optional
 from dataclasses import dataclass
-from aocutils import getInput
+from aocutils import getInput, get_char
 
 INPUT=getInput("inputs\\4.txt")
 
@@ -9,19 +9,8 @@ from rich.console import Console
 from rich.table import Table
 from rich import box
 from rich.theme import Theme
-from rich.color import Color
 from random import randint
 import time 
-
-def get_char() -> str:
-	import sys
-	'''multi-platform getch that always returns a string'''
-	if sys.platform == "win32":
-		import msvcrt
-		return msvcrt.getch().decode("ASCII")
-	else:
-		import getch
-		return getch.getch()
 
 @dataclass
 class Passport:
