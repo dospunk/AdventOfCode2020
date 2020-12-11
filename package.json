@@ -1,0 +1,18 @@
+{
+  "name": "adventofcode2020",
+  "version": "1.0.0",
+  "description": "My Advent of Code 2020 answers",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dospunk/AdventOfCode2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dospunk/AdventOfCode2020/issues"
+  },
+  "homepage": "https://github.com/dospunk/AdventOfCode2020#readme"
+}

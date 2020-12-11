@@ -1,0 +1,1 @@
+export declare function getInput(fileName:string):Promise<string>;
