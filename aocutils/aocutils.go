@@ -24,5 +24,5 @@ func ReadInput(fileName string) string {
 
 	bytes, err := ioutil.ReadAll(file)
 	CheckErr(err)
-	return strings.TrimSpace(string(bytes))
+	return strings.ReplaceAll(strings.TrimSpace(string(bytes)), "\r", "")
 }
