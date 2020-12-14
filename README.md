@@ -16,3 +16,4 @@ My Advent of Code 2020 answers
 | 10  |       |    |    | 1 only |           |             |
 | 11  |       |    |    |   X    |           |     1 only  |
 | 12  |       |    |    |   X    |           |             |
+| 13  |       |  X |    |        |           |             |
