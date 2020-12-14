@@ -26,6 +26,8 @@ def part1(arrival_time: int, busses: list[int]) -> int :
 	return departures[min_departure] * (min_departure - arrival_time)
 
 def part2(busses: list[int]) -> int:
+	#Chinese Remainder Theorem
+	#https://crypto.stanford.edu/pbc/notes/numbertheory/crt.html
 	a_list = [i*-1 for i,x in enumerate(busses) if x != -1]
 	valid_busses = [bus for bus in busses if bus != -1]
 	M = math.prod(valid_busses)
