@@ -14,5 +14,6 @@
   "bugs": {
     "url": "https://github.com/dospunk/AdventOfCode2020/issues"
   },
-  "homepage": "https://github.com/dospunk/AdventOfCode2020#readme"
+  "homepage": "https://github.com/dospunk/AdventOfCode2020#readme",
+  "type": "module"
 }
